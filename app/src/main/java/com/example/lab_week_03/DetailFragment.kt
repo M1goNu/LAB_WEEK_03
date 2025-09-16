@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Button
+import androidx.navigation.fragment.findNavController
 
 class DetailFragment : Fragment() {
 
     private lateinit var coffeeTitle: TextView
     private lateinit var coffeeDesc: TextView
+    private lateinit var backButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,6 +27,7 @@ class DetailFragment : Fragment() {
 
         coffeeTitle = view.findViewById(R.id.coffee_title)
         coffeeDesc = view.findViewById(R.id.coffee_desc)
+        backButton = view.findViewById(R.id.btn_back)
 
         val coffeeId = arguments?.getInt(ListFragment.COFFEE_ID)
 
@@ -40,6 +44,18 @@ class DetailFragment : Fragment() {
                 coffeeTitle.text = getString(R.string.latte_title)
                 coffeeDesc.text = getString(R.string.latte_desc)
             }
+            R.id.cappuccino -> {
+                coffeeTitle.text = getString(R.string.cappuccino_title)
+                coffeeDesc.text = getString(R.string.cappuccino_desc)
+            }
+            R.id.espresso -> {
+                coffeeTitle.text = getString(R.string.espresso_title)
+                coffeeDesc.text = getString(R.string.espresso_desc)
+            }
+        }
+
+        backButton.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 }
